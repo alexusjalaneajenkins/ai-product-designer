@@ -4,10 +4,10 @@ import Research from './components/Research';
 import ProductDoc from './components/ProductDoc';
 import Plan from './components/Plan';
 import Blueprint from './components/Blueprint';
-import CodePrompt from './components/CodePrompt';
+import Idea from './components/Idea';
 
 function App() {
-  const [currentStep, setCurrentStep] = useState('research');
+  const [currentStep, setCurrentStep] = useState('idea');
 
   // Central State
   const [researchData, setResearchData] = useState('');
@@ -23,9 +23,11 @@ function App() {
 
   const renderStep = () => {
     switch (currentStep) {
+      case 'idea':
+        return <Idea data={productIdea} setData={setProductIdea} />;
       case 'research':
         return <Research data={researchData} setData={setResearchData} />;
-      case 'idea':
+      case 'prd': // Renamed from 'idea' to match Sidebar
         return <ProductDoc data={productIdea} setData={setProductIdea} />;
       case 'plan':
         return <Plan data={plan} setData={setPlan} />;
@@ -34,7 +36,7 @@ function App() {
       case 'code':
         return <CodePrompt data={{ researchData, productIdea, plan, blueprint }} />;
       default:
-        return <Research />;
+        return <Idea data={productIdea} setData={setProductIdea} />;
     }
   };
 
